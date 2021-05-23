@@ -159,7 +159,7 @@
                                    var close_time = $(obj).find("input[name='close']").val();
 								   $.getJSON(SUBMIT_URL, {km:km, open_time:open_time, close_time:close_time}).done(
 									function(data) {
-										console.log("Submission response: " data.result.message);
+										console.log("Submission response: " + data.result.message);
 										}
 									).fail(function(err){
 										// In case you get an error...
