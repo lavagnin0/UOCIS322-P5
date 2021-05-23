@@ -150,10 +150,10 @@
 			$('#submit').click(
                     function(submit){
                         submit.preventDefault();
-						var SUBMIT_URL = SCRIPT_ROOT + "/_submit"
+						var SUBMIT_URL = SCRIPT_ROOT + "/_submit";
                         $('.control').each(
                             function(index, obj){
-                                var km = $(obj).find("input[name='km']").val()
+                                var km = $(obj).find("input[name='km']").val();
                                 if (km != ""){
                                    var open_time = $(obj).find("input[name='open']").val();
                                    var close_time = $(obj).find("input[name='close']").val();
