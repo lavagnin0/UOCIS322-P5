@@ -151,13 +151,14 @@
                     function(submit){
                         submit.preventDefault();
 						var SUBMIT_URL = SCRIPT_ROOT + "/_submit";
+			var new_insert = true;
                         $('.control').each(
                             function(index, obj){
                                 var km = $(obj).find("input[name='km']").val();
                                 if (km != ""){
                                    var open_time = $(obj).find("input[name='open']").val();
                                    var close_time = $(obj).find("input[name='close']").val();
-								   $.getJSON(SUBMIT_URL, {km:km, open_time:open_time, close_time:close_time}).done(
+								   $.getJSON(SUBMIT_URL, {km:km, open_time:open_time, close_time:close_time, new_insert:new_insert}).done(
 									function(data) {
 										console.log("Submission response: " + data.result.message);
 										}
@@ -166,6 +167,7 @@
 										console.log("Submission error!");
 										console.log(err);
 									});
+					new_insert = false;
 									
                                 }
                             }
