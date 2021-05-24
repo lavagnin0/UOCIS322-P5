@@ -18,6 +18,7 @@ import logging
 # Globals
 ###
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 CONFIG = config.configuration()
 
 client = MongoClient('mongodb://' + os.environ['MONGODB_HOSTNAME'], 27017)
@@ -39,6 +40,7 @@ def display():
     if db.tododb.count_documents({}) != 0:
         return render_template('display.html', items=list(db.tododb.find()))
     else:
+        flask.flash("No saved times to display!")
         return redirect(url_for('index'))
 
 
@@ -76,6 +78,9 @@ def _calc_times():
 
 @app.route("/_submit")
 def _submit():
+    new_insert = request.args.get('new_insert', False, type=bool)
+    if new_insert:
+        db.tododb.delete_many({})
     km = request.args.get('km', 999, type=float)
     if not db.tododb.find_one({"dist": km}):
         control_times = {
